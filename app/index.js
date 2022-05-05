@@ -1,12 +1,16 @@
 const express = require('express');
 const app = express();
 const port = '3002';
+const bodyParser = require('body-parser');
+const userRoute = require('./routes/users');
 
-app.get('/', (req,res)=>{
-    res.send({
-        msg : "jancok World"
-    })
-})
+//parser
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+
+//route
+app.use('/user', userRoute);
 
 app.listen(port, ()=>{
     console.log(`Running on localhost: ${port}`);
